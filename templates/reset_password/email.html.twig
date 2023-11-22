@@ -1,0 +1,11 @@
+<h1>Pour réinitialiser votre mot de passe, veuillez visiter le lien suivant</h1>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. Si vous ne souhaitez pas réinitialiser votre mot de passe, ignorez simplement cet email.
+</p>
+
+<p>
+    Cordialement,<br>
+    L'équipe Todo & Co
+</p>

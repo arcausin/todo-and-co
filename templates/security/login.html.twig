@@ -8,6 +8,12 @@
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
+        {% for flash_message in app.flashes('successVerifyEmail') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
         {% if app.user %}
             <div class="mb-3">
                 Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
@@ -39,7 +45,7 @@
     </form>
 
     <div>
-        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a> <br>
-        <a href="{{ path('app_register') }}">S'inscrire</a>
+        <a href="{{ path('app_forgot_password_request') }}" class="text-white">Mot de passe oublié ?</a> <br>
+        <a href="{{ path('app_register') }}" class="text-white">S'inscrire</a>
     </div>
 {% endblock %}

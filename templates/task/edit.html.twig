@@ -7,7 +7,7 @@
 
     {{ include('task/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_task_index') }}">retourner à la liste</a>
+    <a href="{{ path('app_task_index') }}" class="text-white">retourner à la liste</a>
 
     {{ include('task/_delete_form.html.twig') }}
 {% endblock %}

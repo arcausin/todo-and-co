@@ -45,7 +45,10 @@ class TaskType extends AbstractType
                 ],
                 'required' => true,
             ])
-            //->add('is_done')
+            ->add('is_done', null, [
+                'label' => 'Tâche terminée ?',
+                'required' => false,
+            ])
             //->add('created_at')
             //->add('user')
         ;

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tâches - ToDo & Co{% endblock %}
+
+{% block body %}
+    <h1>Liste des tâches</h1>
+
+    {% for flash_message in app.flashes('successTaskAdd') %}
+    <div class="alert alert-success" role="alert">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+
+    {% for flash_message in app.flashes('successTaskEdit') %}
+    <div class="alert alert-success" role="alert">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+
+    {% for flash_message in app.flashes('successTaskDelete') %}
+    <div class="alert alert-success" role="alert">
+        {{ flash_message }}
+    </div>
+    {% endfor %}
+
+    <table class="table text-white">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Is_done</th>
+                <th>Created_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.user }}</td>
+                <td>{{ task.id }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.content }}</td>
+                <td>{{ task.isDone ? 'Yes' : 'No' }}</td>
+                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_task_show', {'id': task.id}) }}" class="text-white">voir</a>
+                    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="text-white">modifier</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">Aucune tâche trouvée</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_task_new') }}" class="text-white">Créer une nouvelle tâche</a>
+{% endblock %}

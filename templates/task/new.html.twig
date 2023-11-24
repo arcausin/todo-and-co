@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle tâche - ToDo & Co{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une nouvelle tâche</h1>
+
+    {{ include('task/_form.html.twig') }}
+
+    <a href="{{ path('app_task_index') }}" class="text-white">retourner à la liste des tâches</a>
+{% endblock %}

@@ -14,11 +14,11 @@
             </div>
         {% endfor %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        {% for flash_message in app.flashes('successResetPassword') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
             </div>
-        {% endif %}
+        {% endfor %}
 
         <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 

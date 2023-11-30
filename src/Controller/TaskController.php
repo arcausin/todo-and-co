@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/taches', name: 'app_task_')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
         if (!$this->getUser()) {
@@ -98,7 +98,7 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    #[Route('/{id}/supprimer', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser() || $this->getUser() !== $task->getUser() && !$this->isGranted('ROLE_ADMIN')) {

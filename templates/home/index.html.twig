@@ -11,7 +11,7 @@
     {% if app.user %}
         <a href="{{ path('app_task_index') }}" class="text-white">Voir mes tâches</a>
     {% else %}
-    <a href="{{ path('app_login') }}" class="text-white">Se connecter</a> ou <a href="{{ path('app_register') }}" class="text-white">S'inscrire</a>
+        <a href="{{ path('app_login') }}" class="text-white">Se connecter</a> ou <a href="{{ path('app_register') }}" class="text-white">S'inscrire</a>
     {% endif %}
 </div>
 {% endblock %}

@@ -23,11 +23,12 @@ class TaskController extends AbstractController
 
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findAll(),
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()]),
+                'tasksAnonym' => $taskRepository->findBy(['user' => null])
             ]);
         } else {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findBy(['user' => $this->getUser()]),
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()])
             ]);
         }
     }
@@ -59,18 +60,6 @@ class TaskController extends AbstractController
         return $this->render('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Task $task): Response
-    {
-        if (!$this->getUser() || $this->getUser() !== $task->getUser() && !$this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
         ]);
     }
 

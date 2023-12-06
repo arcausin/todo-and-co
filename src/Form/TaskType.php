@@ -30,7 +30,7 @@ class TaskType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('content', TextType::class, [
+            ->add('content', null, [
                 'label' => 'Contenu',
                 'constraints' => [
                     new NotBlank([
@@ -38,9 +38,7 @@ class TaskType extends AbstractType
                     ]),
                     new Length([
                         'min' => 3,
-                        'minMessage' => 'Le contenu doit contenir au moins {{ limit }} caractères.',
-                        'max' => 255,
-                        'maxMessage' => 'Le contenu doit contenir au maximum {{ limit }} caractères.'
+                        'minMessage' => 'Le contenu doit contenir au moins {{ limit }} caractères.'
                     ])
                 ],
                 'required' => true,

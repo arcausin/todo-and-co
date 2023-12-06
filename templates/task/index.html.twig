@@ -3,59 +3,96 @@
 {% block title %}Liste des tâches - ToDo & Co{% endblock %}
 
 {% block body %}
-    <h1>Liste des tâches</h1>
+<div class="container">
+    <div class="row">
+        {% for flash_message in app.flashes('successTaskAdd') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
 
-    {% for flash_message in app.flashes('successTaskAdd') %}
-    <div class="alert alert-success" role="alert">
-        {{ flash_message }}
+        {% for flash_message in app.flashes('successTaskEdit') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
+        {% for flash_message in app.flashes('successTaskDelete') %}
+            <div class="alert alert-success" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
+        <h1 class="text-center mt-3 mb-3">Liste des tâches</h1>
+
+        <a class="text-center mb-3" href="{{ path('app_task_new') }}"><span class="badge text-bg-success py-2 fs-6"><i class="fas fa-plus"></i> Créer une nouvelle tâche</span></a>
+
+        <div class="col-12 mb-3">
+            <div class="row g-3">
+                {% for task in tasks %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    {% if task.isDone %}
+                    <div class="rounded-3 border border-secondary">
+                    {% else %}
+                    <div class="rounded-3 border border-info">
+                    {% endif %}
+                        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                            <span>{{ task.title }}</span>
+        
+                            {% if app.user %}
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ path('app_task_edit', {'id': task.id}) }}"><span class="badge text-bg-warning py-2 me-3 fs-6"><i class="fas fa-edit"></i></span></a>
+        
+                                {{ include('task/_delete_form.html.twig') }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="px-3 py-2">
+                            {{ task.content }}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                            <span class="badge text-bg-light py-2 fs-6 mb-1"><i class="fas fa-user"></i> {{ task.user }}</span>
+        
+                            {{ task.createdAt|date('d/m/Y') }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+                {% if tasksAnonym is defined %}
+                    {% for taskAnonym in tasksAnonym %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        {% if taskAnonym.isDone %}
+                        <div class="rounded-3 border border-secondary">
+                        {% else %}
+                        <div class="rounded-3 border border-info">
+                        {% endif %}
+                            <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                                <span>{{ taskAnonym.title }}</span>
+            
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ path('app_task_edit', {'id': taskAnonym.id}) }}"><span class="badge text-bg-warning py-2 me-3 fs-6"><i class="fas fa-edit"></i></span></a>
+            
+                                    <form method="post" action="{{ path('app_task_delete', {'id': taskAnonym.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cette tâche ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ taskAnonym.id) }}">
+                                        <button class="badge text-bg-danger py-2 fs-6 border-0"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2">
+                                {{ taskAnonym.content }}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                                <span class="badge text-bg-light py-2 fs-6 mb-1"><i class="fas fa-user"></i> Anonyme</span>
+            
+                                {{ taskAnonym.createdAt|date('d/m/Y') }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-    {% for flash_message in app.flashes('successTaskEdit') %}
-    <div class="alert alert-success" role="alert">
-        {{ flash_message }}
-    </div>
-    {% endfor %}
-
-    {% for flash_message in app.flashes('successTaskDelete') %}
-    <div class="alert alert-success" role="alert">
-        {{ flash_message }}
-    </div>
-    {% endfor %}
-
-    <table class="table text-white">
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Is_done</th>
-                <th>Created_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-            <tr>
-                <td>{{ task.user }}</td>
-                <td>{{ task.id }}</td>
-                <td>{{ task.title }}</td>
-                <td>{{ task.content }}</td>
-                <td>{{ task.isDone ? 'Yes' : 'No' }}</td>
-                <td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_task_show', {'id': task.id}) }}" class="text-white">voir</a>
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="text-white">modifier</a>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="6">Aucune tâche trouvée</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_task_new') }}" class="text-white">Créer une nouvelle tâche</a>
+</div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.username }} - modifier un utilisateur{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1 class="text-center fs-1 mt-5 mb-5">Modifier un utilisateur</h1>
+
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="text-center border shadow rounded-4 p-4 mb-5">
+                {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

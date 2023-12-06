@@ -58,6 +58,11 @@
                         <li class="nav-item">
                             <a href="{{ path('app_task_index') }}" class="nav-link text-white animate-opacity">Tâches</a>
                         </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_user_index') }}" class="nav-link text-white animate-opacity">Utilisateurs</a>
+                        </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a href="{{ path('app_logout') }}" class="nav-link text-white animate-opacity pe-0">Se déconnecter</a>
                         </li>

@@ -9,10 +9,12 @@
         {{ form_widget(form.content, {'attr': {'class': 'form-control w-75 text-center mx-auto', 'rows': '5'}})}}
     </div>
 
+    {% if editTask is defined %}
     <div class="form-group mb-4">
         {{ form_label(form.is_done, 'Terminé ?', {'label_attr': {'class': 'form-label fs-3'}})}}
         {{ form_widget(form.is_done, {'attr': {'class': 'form-check w-75 text-center mx-auto'}})}}
     </div>
+    {% endif %}
 
     <button class="btn text-white">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}

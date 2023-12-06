@@ -1,51 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Se connecter{% endblock %}
+{% block title %}Se connecter - ToDo & Co{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+<div class="container">
+    <div class="row">
+        <h1 class="text-center fs-1 mt-5 mb-5">Connexion</h1>
 
-        {% for flash_message in app.flashes('successVerifyEmail') %}
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+
+        {% for flash_message in app.flashes('successRegister') %}
             <div class="alert alert-success" role="alert">
                 {{ flash_message }}
             </div>
         {% endfor %}
 
-        {% for flash_message in app.flashes('successResetPassword') %}
-            <div class="alert alert-success" role="alert">
-                {{ flash_message }}
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="text-center border shadow rounded-4 p-4 mb-5">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+            
+                    {% for flash_message in app.flashes('successVerifyEmail') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+            
+                    {% for flash_message in app.flashes('successResetPassword') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+            
+                    <label class="form-label fs-3 required" for="username">Adresse email</label>
+                    <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control w-75 text-center mx-auto" autocomplete="email" required autofocus>
+                    <br>
+                    <label class="form-label fs-3 required" for="password">Mot de passe</label>
+                    <input type="password" name="_password" id="password" class="form-control w-75 text-center mx-auto" autocomplete="current-password" required>
+                    <br>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            
+                    {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+            
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                    #}
+            
+                    <button type="submit" class="btn btn-lg btn-success">Se connecter</button>
+                </form>
+            
+                <div>
+                    <a href="{{ path('app_forgot_password_request') }}" class="text-white">Mot de passe oublié ?</a> <br>
+                    <a href="{{ path('app_register') }}" class="text-white">S'inscrire</a>
+                </div>
             </div>
-        {% endfor %}
-
-        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-
-        <label for="username">Adresse email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <br>
-        <label for="password">Mot de passe</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <br>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
-
-        <button type="submit" class="btn btn-lg btn-success">Se connecter</button>
-    </form>
-
-    <div>
-        <a href="{{ path('app_forgot_password_request') }}" class="text-white">Mot de passe oublié ?</a> <br>
-        <a href="{{ path('app_register') }}" class="text-white">S'inscrire</a>
+        </div>
     </div>
+</div>
 {% endblock %}

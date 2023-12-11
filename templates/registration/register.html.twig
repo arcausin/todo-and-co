@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1 class="text-center fs-1 mt-5 mb-5">Inscription</h1>
+        <h1 class="text-center mt-5 mb-5">Inscription</h1>
 
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -46,7 +46,7 @@
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'checked': 'checked'}}) }}
                     </div>
 
-                    <button type="submit" class="btn btn-lg btn-primary">Créer un compte</button>
+                    <button type="submit" class="btn btn-lg btn-primary mb-3">Créer un compte</button>
                 {{ form_end(registrationForm) }}
 
                 <div>

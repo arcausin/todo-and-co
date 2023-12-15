@@ -58,41 +58,47 @@
                     </div>
                 </div>
                 {% endfor %}
-    
-                {% if tasksAnonym is defined %}
-                    {% for taskAnonym in tasksAnonym %}
-                    <div class="col-12 col-md-6 col-lg-4">
-                        {% if taskAnonym.isDone %}
-                        <div class="rounded-3 border border-secondary">
-                        {% else %}
-                        <div class="rounded-3 border border-info">
-                        {% endif %}
-                            <div class="d-flex justify-content-between align-items-center px-3 py-2">
-                                <span>{{ taskAnonym.title }}</span>
-            
-                                <div class="d-flex justify-content-between">
-                                    <a href="{{ path('app_task_edit', {'id': taskAnonym.id}) }}"><span class="badge text-bg-warning py-2 me-3 fs-6"><i class="fas fa-edit"></i></span></a>
-            
-                                    <form method="post" action="{{ path('app_task_delete', {'id': taskAnonym.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cette tâche ?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ taskAnonym.id) }}">
-                                        <button class="badge text-bg-danger py-2 fs-6 border-0"><i class="fas fa-trash"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="px-3 py-2">
-                                {{ taskAnonym.content }}
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center px-3 py-2">
-                                <span class="badge text-bg-light py-2 fs-6 mb-1"><i class="fas fa-user"></i> Anonyme</span>
-            
-                                {{ taskAnonym.createdAt|date('d/m/Y') }}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% endif %}
             </div>
         </div>
+
+        {% if tasksAnonym is defined and tasksAnonym is not empty %}
+        <h2 class="text-center mt-3 mb-3">Liste des tâches anonymes</h1>
+
+        <div class="col-12 mb-3">
+            <div class="row g-3">
+                {% for taskAnonym in tasksAnonym %}
+                <div class="col-12 col-md-6 col-lg-4">
+                    {% if taskAnonym.isDone %}
+                    <div class="rounded-3 border border-secondary">
+                    {% else %}
+                    <div class="rounded-3 border border-info">
+                    {% endif %}
+                        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                            <span>{{ taskAnonym.title }}</span>
+        
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ path('app_task_edit', {'id': taskAnonym.id}) }}"><span class="badge text-bg-warning py-2 me-3 fs-6"><i class="fas fa-edit"></i></span></a>
+        
+                                <form method="post" action="{{ path('app_task_delete', {'id': taskAnonym.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cette tâche ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ taskAnonym.id) }}">
+                                    <button class="badge text-bg-danger py-2 fs-6 border-0"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="px-3 py-2">
+                            {{ taskAnonym.content }}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+                            <span class="badge text-bg-light py-2 fs-6 mb-1"><i class="fas fa-user"></i> Anonyme</span>
+        
+                            {{ taskAnonym.createdAt|date('d/m/Y') }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

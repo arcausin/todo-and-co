@@ -24,12 +24,12 @@ class TaskController extends AbstractController
 
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findBy(['user' => $this->getUser()]),
-                'tasksAnonym' => $taskRepository->findBy(['user' => null])
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['is_done' => 'ASC', 'created_at' => 'ASC']),
+                'tasksAnonym' => $taskRepository->findBy(['user' => null], ['is_done' => 'ASC', 'created_at' => 'ASC'])
             ]);
         } else {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findBy(['user' => $this->getUser()])
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['is_done' => 'ASC', 'created_at' => 'ASC'])
             ]);
         }
     }

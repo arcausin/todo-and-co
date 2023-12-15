@@ -14,5 +14,5 @@
 - Assurez-vous de respecter les conventions de codage en vigueur dans le projet.
 - Documentez vos modifications de manière claire et concise.
 - Testez vos modifications avant de soumettre une pull request.
-- Vérifier la qualité du code via SymfonyInsight.
-- Si cela semble nécessaire ou demander, réaliser un test de performance de l'application.
+- Vérifiez la qualité du code via SymfonyInsight.
+- Si cela semble nécessaire ou demander, réalisez un test de performance de l'application.

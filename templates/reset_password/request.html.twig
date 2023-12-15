@@ -3,17 +3,30 @@
 {% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('reset_password_error') %}
+<div class="container">
+    <div class="row">
+        {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-    <h1>Réinitialiser votre mot de passe</h1>
+        {% endfor %}
+        <h1 class="text-center mt-5 mb-5">Réinitialiser votre mot de passe</h1>
 
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.</small>
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="text-center border shadow rounded-4 p-4 mb-5">
+                {{ form_start(requestForm) }}
+                <div class="form-group mb-3">
+                    {{ form_label(requestForm.email, 'Adresse email', {'label_attr': {'class': 'form-label fs-3'}})}}
+                    {{ form_widget(requestForm.email, {'attr': {'class': 'form-control w-75 text-center mx-auto'}})}}
+                </div>
+
+                <div class="text-center mb-3">
+                    <small>Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.</small>
+                </div>
+
+                <button class="btn btn-primary">Envoyer un email de réinitialisation de mot de passe</button>
+            {{ form_end(requestForm) }}
+            </div>
         </div>
+    </div>
+</div>
 
-        <button class="btn btn-primary">Envoyer un email de réinitialisation du mot de passe</button>
-    {{ form_end(requestForm) }}
 {% endblock %}

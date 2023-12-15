@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Form\TaskType;
+use App\Form\NewTaskType;
+use App\Form\EditTaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/taches', name: 'app_task_')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
+    #[Route('', name: 'index', methods: ['GET'])]
     public function index(TaskRepository $taskRepository): Response
     {
         if (!$this->getUser()) {
@@ -23,11 +24,12 @@ class TaskController extends AbstractController
 
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findAll(),
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['is_done' => 'ASC', 'created_at' => 'ASC']),
+                'tasksAnonym' => $taskRepository->findBy(['user' => null], ['is_done' => 'ASC', 'created_at' => 'ASC'])
             ]);
         } else {
             return $this->render('task/index.html.twig', [
-                'tasks' => $taskRepository->findBy(['user' => $this->getUser()]),
+                'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['is_done' => 'ASC', 'created_at' => 'ASC'])
             ]);
         }
     }
@@ -40,7 +42,7 @@ class TaskController extends AbstractController
         }
 
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(NewTaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,18 +61,7 @@ class TaskController extends AbstractController
         return $this->render('task/new.html.twig', [
             'task' => $task,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Task $task): Response
-    {
-        if (!$this->getUser() || $this->getUser() !== $task->getUser() && !$this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_home');
-        }
-
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
+            'addTask' => true
         ]);
     }
 
@@ -81,7 +72,7 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(EditTaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,10 +86,11 @@ class TaskController extends AbstractController
         return $this->render('task/edit.html.twig', [
             'task' => $task,
             'form' => $form,
+            'editTask' => true
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    #[Route('/{id}/supprimer', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser() || $this->getUser() !== $task->getUser() && !$this->isGranted('ROLE_ADMIN')) {

@@ -58,6 +58,11 @@
                         <li class="nav-item">
                             <a href="{{ path('app_task_index') }}" class="nav-link text-white animate-opacity">Tâches</a>
                         </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a href="{{ path('app_user_index') }}" class="nav-link text-white animate-opacity">Utilisateurs</a>
+                        </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a href="{{ path('app_logout') }}" class="nav-link text-white animate-opacity pe-0">Se déconnecter</a>
                         </li>
@@ -77,7 +82,7 @@
 
     <main class="container-fluid" style="min-height: 60vh; padding-top: 62px" id="main-content">
         {% if app.user %}
-            <div class="mt-3 d-flex justify-content-center">connecté en tant que : {{ app.user }}</div>
+            <div class="mt-3 mb-3 d-flex justify-content-center">connecté en tant que : {{ app.user }}</div>
         {% endif %}
 
         {% block body %}{% endblock %}

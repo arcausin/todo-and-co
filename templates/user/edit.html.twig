@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle tâche - ToDo & Co{% endblock %}
+{% block title %}{{ user.username }} - modifier un utilisateur{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row">
-        <h1 class="text-center mt-3 mb-3">Ajouter une nouvelle tâche</h1>
+        <h1 class="text-center mt-3 mb-3">Modifier un utilisateur</h1>
 
         <div class="col-12 col-md-6 offset-md-3">
             <div class="text-center border shadow rounded-4 p-4 mb-5">
-                {{ include('task/_form.html.twig') }}
+                {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
             </div>
         </div>
     </div>

@@ -37,6 +37,10 @@ class ResetPasswordController extends AbstractController
     #[Route('', name: 'app_forgot_password_request', methods: ['GET', 'POST'])]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
 
@@ -121,6 +125,8 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
+            $this->addFlash('successResetPassword', 'Votre mot de passe a été modifié avec succès.');
+
             return $this->redirectToRoute('app_login');
         }
 
@@ -159,7 +165,7 @@ class ResetPasswordController extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address('no-reply@todo-and-co.test', 'ToDo & Co'))
             ->to($user->getEmail())
-            ->subject('Your password reset request')
+            ->subject('Votre demande de réinitialisation de mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,

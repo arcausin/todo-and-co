@@ -52,18 +52,16 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/supprimer', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function delete(User $user, EntityManagerInterface $entityManager): Response
     {
         if (!$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('app_home');
         }
 
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
+        $entityManager->remove($user);
+        $entityManager->flush();
 
-            $this->addFlash('successUserDelete', 'L\'utilisateur '.$user->getUsername().' a été supprimé avec succès.');
-        }
+        $this->addFlash('successUserDelete', 'L\'utilisateur '.$user->getUsername().' a été supprimé avec succès.');
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -59,7 +59,7 @@ class HomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = $client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $user = $userRepository->findOneByEmail('alexis@test.test');
+        $user = $userRepository->findFirstAdmin();
         $client->loginUser($user);
 
         $urlGenerator = $client->getContainer()->get('router.default');
@@ -84,7 +84,7 @@ class HomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = $client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $user = $userRepository->findOneByEmail('alexis@test.test');
+        $user = $userRepository->findFirstAdmin();
         $client->loginUser($user);
 
         $urlGenerator = $client->getContainer()->get('router.default');
@@ -104,7 +104,7 @@ class HomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = $client->getContainer()->get('doctrine.orm.entity_manager')->getRepository(User::class);
-        $user = $userRepository->findOneByEmail('alexis@test.test');
+        $user = $userRepository->findFirstAdmin();
         $client->loginUser($user);
 
         $urlGenerator = $client->getContainer()->get('router.default');

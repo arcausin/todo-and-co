@@ -91,18 +91,16 @@ class TaskController extends AbstractController
     }
 
     #[Route('/{id}/supprimer', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
+    public function delete(Task $task, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser() || $this->getUser() !== $task->getUser() && !$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('app_home');
         }
 
-        if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($task);
-            $entityManager->flush();
+        $entityManager->remove($task);
+        $entityManager->flush();
 
-            $this->addFlash('successTaskDelete', 'La tâche '.$task->getTitle().' a été supprimée avec succès.');
-        }
+        $this->addFlash('successTaskDelete', 'La tâche '.$task->getTitle().' a été supprimée avec succès.');
 
         return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
     }

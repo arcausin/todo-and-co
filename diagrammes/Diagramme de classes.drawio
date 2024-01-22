@@ -1,0 +1,46 @@
+<mxfile host="app.diagrams.net" modified="2023-11-17T13:55:36.235Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0" etag="7A8GgAgif5weXXI3cDEb" version="22.0.0" type="device">
+  <diagram name="Page-1" id="kaoYOqhvuLUMERpKKi9R">
+    <mxGraphModel dx="1430" dy="-406" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oAuCq6BkKggLuHPVJUeQ-19" value="" style="rounded=0;whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;labelBackgroundColor=none;" parent="1" vertex="1">
+          <mxGeometry x="19" y="1604" width="790" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="oAuCq6BkKggLuHPVJUeQ-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="1" source="7pwwrW8SkEieM3p2LjNU-9" target="7pwwrW8SkEieM3p2LjNU-13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-9" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="57" y="1629" width="300" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-10" value="&lt;div&gt;+ id : int&lt;/div&gt;&lt;div&gt;+ username : string&lt;/div&gt;&lt;div&gt;+ email : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ password : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ roles :string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ createdAt : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ tasks [] : Collection&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="7pwwrW8SkEieM3p2LjNU-9" vertex="1">
+          <mxGeometry y="26" width="300" height="114" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="7pwwrW8SkEieM3p2LjNU-9" vertex="1">
+          <mxGeometry y="140" width="300" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-12" value="&lt;div&gt;getId()&lt;/div&gt;&lt;div&gt;get/setUsername()&lt;/div&gt;&lt;div&gt;get/setEmail()&lt;br&gt;&lt;/div&gt;&lt;div&gt;get/setPassword()&lt;/div&gt;&lt;div&gt;get/setRoles()&lt;/div&gt;&lt;div&gt;getTasks()&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;strokeWidth=1;" parent="7pwwrW8SkEieM3p2LjNU-9" vertex="1">
+          <mxGeometry y="148" width="300" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-13" value="Task" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="1639" width="250" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-14" value="&lt;div&gt;+ id : int&lt;/div&gt;&lt;div&gt;+ title : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ content : string&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ isDone : bool&lt;/div&gt;&lt;div&gt;+ createdAt : string&lt;/div&gt;&lt;div&gt;+ user : User&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="7pwwrW8SkEieM3p2LjNU-13" vertex="1">
+          <mxGeometry y="26" width="250" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-15" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="7pwwrW8SkEieM3p2LjNU-13" vertex="1">
+          <mxGeometry y="120" width="250" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="7pwwrW8SkEieM3p2LjNU-16" value="&lt;div&gt;getId()&lt;/div&gt;&lt;div&gt;get/setTitle()&lt;/div&gt;&lt;div&gt;get/set/Content()&lt;/div&gt;&lt;div&gt;isDone()&lt;/div&gt;&lt;div&gt;get/setUser()&lt;/div&gt;&lt;div&gt;get/setCreatedAt()&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="7pwwrW8SkEieM3p2LjNU-13" vertex="1">
+          <mxGeometry y="128" width="250" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="oAuCq6BkKggLuHPVJUeQ-9" value="*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="490" y="1726" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oAuCq6BkKggLuHPVJUeQ-10" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="357" y="1726" width="30" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

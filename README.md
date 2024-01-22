@@ -22,11 +22,6 @@ php bin/console doctrine:database:create
 5. Générer les structures de table  
 ```
 php bin/console doctrine:migrations:migrate
-``` 
-
-6. générer les données pré-établies pour tester le projet  
-```
-php bin/console doctrine:fixtures:load
 ```
 
 7. Lancer le serveur local du projet
